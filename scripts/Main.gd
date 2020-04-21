@@ -3,13 +3,28 @@ extends Node2D
 export(PackedScene) var brickScn = preload("res://scenes/Brick.tscn")
 export(Vector2) var brickGridSize = Vector2(5, 8)
 
+onready var screenSize : Vector2 = get_viewport_rect().size
+
+var brickSpacing_V : float = 20
+var brickOffset : Vector2 = Vector2(40, 90)
+
 func _ready() -> void:
+	
+	var gridX0 = self.brickOffset.x
+	var gridXf = self.screenSize.x - self.brickOffset.x
+	var gridX_delta = abs(gridXf - gridX0)
+	print(gridX0, " ", gridXf, " ", gridX_delta)
+	
+	var columnWidth = gridX_delta / self.brickGridSize.x
+	print(columnWidth)
+	
+	self.brickOffset.x += (columnWidth - Brick.brickSize.x) / 2
+	var brickSpacing : Vector2 = Vector2((columnWidth - Brick.brickSize.x), self.brickSpacing_V)
 	
 	for i in range(0, self.brickGridSize.x):
 		for j in range(0, self.brickGridSize.y):
 			var brick = self.brickScn.instance()
-			var b_size = Vector2(100, 40)
-		
-			brick.position = b_size * Vector2(i, j) + Vector2(100, 90)
+			
+			brick.position = self.brickOffset + Vector2(i, j)*(Brick.brickSize + brickSpacing)
 			
 			add_child(brick)
