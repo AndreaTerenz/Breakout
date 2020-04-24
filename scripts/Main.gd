@@ -3,13 +3,13 @@ extends Node2D
 export(PackedScene) var brickScn = preload("res://scenes/Brick.tscn")
 export(Vector2) var brickGridSize = Vector2(5, 8)
 
+onready var ball = $Ball
 onready var screenSize : Vector2 = get_viewport_rect().size
 
 var brickSpacing_V : float = 20
 var brickOffset : Vector2 = Vector2(40, 90)
 
 func _ready() -> void:
-	
 	var gridXf = self.screenSize.x - self.brickOffset.x
 	var gridX_delta = abs(gridXf - self.brickOffset.x)
 	var columnWidth = gridX_delta / self.brickGridSize.x
@@ -20,7 +20,8 @@ func _ready() -> void:
 	for i in range(0, self.brickGridSize.x):
 		for j in range(0, self.brickGridSize.y):
 			var brick = self.brickScn.instance()
-			
-			brick.position = self.brickOffset + Vector2(i, j)*(Brick.brickSize + brickSpacing)
-			
+			brick.setPos(self.brickOffset + Vector2(i, j)*(Brick.brickSize + brickSpacing))
 			add_child(brick)
+
+func _death_zone_entered(area):
+	pass # Replace with function body.

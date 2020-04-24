@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=2]
@@ -11,11 +11,14 @@ extents = Vector2( 300, 20 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 350, 20 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 273.488, 47.5789 )
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
-position = Vector2( 229.228, 50.5045 )
+position = Vector2( 259.447, 393.701 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
 position = Vector2( 300, 0 )
@@ -44,3 +47,13 @@ shape = SubResource( 2 )
 
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
 position = Vector2( 317.609, 579.394 )
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 300, 643.684 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+shape = SubResource( 3 )
+[connection signal="area_entered" from="DeathZone" to="." method="_death_zone_entered"]

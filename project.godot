@@ -24,6 +24,10 @@ config/name="Breakout"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+
 [display]
 
 window/size/width=600
