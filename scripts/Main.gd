@@ -10,13 +10,9 @@ var brickOffset : Vector2 = Vector2(40, 90)
 
 func _ready() -> void:
 	
-	var gridX0 = self.brickOffset.x
 	var gridXf = self.screenSize.x - self.brickOffset.x
-	var gridX_delta = abs(gridXf - gridX0)
-	print(gridX0, " ", gridXf, " ", gridX_delta)
-	
+	var gridX_delta = abs(gridXf - self.brickOffset.x)
 	var columnWidth = gridX_delta / self.brickGridSize.x
-	print(columnWidth)
 	
 	self.brickOffset.x += (columnWidth - Brick.brickSize.x) / 2
 	var brickSpacing : Vector2 = Vector2((columnWidth - Brick.brickSize.x), self.brickSpacing_V)
