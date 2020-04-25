@@ -16,7 +16,10 @@ height = 20.0
 mass = 0.00102041
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
 linear_velocity = Vector2( 60, 60 )
+linear_damp = 0.0
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -28,3 +31,4 @@ mesh = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]

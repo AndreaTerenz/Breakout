@@ -6,11 +6,11 @@ var mov_right : bool = false
 func _ready():
 	pass # Replace with function body.
 
-func _input(event):
+func _input(_event):
 	self.mov_left = Input.is_action_pressed("ui_left")
 	self.mov_right = Input.is_action_pressed("ui_right")
 
-func _process(delta):
+func _process(_delta):
 	if self.mov_left:
 		move_and_collide(Vector2(-5, 0))
 	if self.mov_right:
