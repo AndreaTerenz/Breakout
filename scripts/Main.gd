@@ -44,7 +44,7 @@ func spawnGrid() -> void:
 			
 			var brick = self.brickScn.instance()
 			brick.setPos(self.brickOffset + Vector2(i, j)*(Brick.brickSize + brickSpacing))
-			add_child(brick)
+			call_deferred("add_child", brick)
 			
 	print(self.brickCount)
 
