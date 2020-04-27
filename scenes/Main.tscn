@@ -42,7 +42,7 @@ rotation = -1.57079
 shape = SubResource( 2 )
 
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
-position = Vector2( 317.609, 579.394 )
+position = Vector2( 300, 575 )
 
 [node name="DeathZone" type="Area2D" parent="."]
 position = Vector2( 300, 643.684 )
