@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/walls.svg" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/walls.svg" type="Texture" id=3]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -11,7 +12,7 @@ extents = Vector2( 300, 20 )
 extents = Vector2( 350, 20 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 273.488, 30.1469 )
+extents = Vector2( 273.488, 30 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -45,7 +46,7 @@ shape = SubResource( 2 )
 position = Vector2( 300, 575 )
 
 [node name="DeathZone" type="Area2D" parent="."]
-position = Vector2( 300, 643.684 )
+position = Vector2( 300, 640 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -61,4 +62,11 @@ color = Color( 0.470588, 0.470588, 0.470588, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="UI" parent="." instance=ExtResource( 1 )]
+margin_right = 600.0
+margin_bottom = 700.0
+[connection signal="died" from="." to="UI" method="increaseDeaths"]
+[connection signal="reset" from="." to="UI" method="resetCounts"]
+[connection signal="scored" from="." to="UI" method="increaseScore"]
 [connection signal="body_entered" from="DeathZone" to="." method="_death_zone_entered"]

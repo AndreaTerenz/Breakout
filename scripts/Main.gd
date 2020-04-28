@@ -1,5 +1,9 @@
 extends Node2D
 
+signal scored
+signal died
+signal reset
+
 export(PackedScene) var brickScn = preload("res://scenes/Brick.tscn")
 export(PackedScene) var ballScn = preload("res://scenes/Ball.tscn")
 export(String, FILE, "*.txt") var gridFile = "res://scripts/grid.txt"
@@ -17,6 +21,7 @@ func _ready() -> void:
 	reset()
 
 func reset() -> void:
+	emit_signal("reset")
 	spawnGrid()
 	spawnBall()
 	
@@ -62,6 +67,7 @@ func ballHitBrick(brick : Node) -> void:
 	call_deferred("remove_child", brick)
 	brick.queue_free()
 	self.brickCount -= 1
+	emit_signal("scored")
 	
 	if (self.brickCount <= 0):
 		reset()
@@ -87,4 +93,5 @@ func loadGridFile() -> Array:
 
 func _death_zone_entered(body: Node) -> void:
 	if (body == ball):
+		emit_signal("died")
 		spawnBall()
