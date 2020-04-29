@@ -2,8 +2,6 @@
 
 [ext_resource path="res://scripts/Ball.gd" type="Script" id=1]
 
-
-
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 bounce = 800.0
@@ -26,7 +24,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
-startVelMult = 204.5
+startVelMult = 242.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource( 2 )

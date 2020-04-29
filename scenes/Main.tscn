@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprites/walls.svg" type="Texture" id=3]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -20,16 +19,8 @@ script = ExtResource( 4 )
 [node name="Walls" type="StaticBody2D" parent="."]
 position = Vector2( 300, 0 )
 
-[node name="Sprite" type="Sprite" parent="Walls"]
-position = Vector2( 0, 350 )
-texture = ExtResource( 3 )
-
 [node name="North" type="CollisionShape2D" parent="Walls"]
 position = Vector2( 0, 10 )
-shape = SubResource( 1 )
-
-[node name="South" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 0, 690 )
 shape = SubResource( 1 )
 
 [node name="East" type="CollisionShape2D" parent="Walls"]
@@ -44,6 +35,7 @@ shape = SubResource( 2 )
 
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
 position = Vector2( 300, 575 )
+speed = 6.4
 
 [node name="DeathZone" type="Area2D" parent="."]
 position = Vector2( 300, 640 )
@@ -63,10 +55,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UI" parent="." instance=ExtResource( 1 )]
-margin_right = 600.0
-margin_bottom = 700.0
-[connection signal="died" from="." to="UI" method="increaseDeaths"]
-[connection signal="reset" from="." to="UI" method="resetCounts"]
-[connection signal="scored" from="." to="UI" method="increaseScore"]
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="UILayer" instance=ExtResource( 1 )]
+[connection signal="died" from="." to="UILayer/UI" method="increaseDeaths"]
+[connection signal="reset" from="." to="UILayer/UI" method="resetCounts"]
+[connection signal="scored" from="." to="UILayer/UI" method="increaseScore"]
 [connection signal="body_entered" from="DeathZone" to="." method="_death_zone_entered"]
