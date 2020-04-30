@@ -17,9 +17,10 @@ var ball : Node = null
 var brickSpacing_V : float = 20
 var brickOffset : Vector2 = Vector2(40, 100)
 
-func _ready() -> void:
+func onStartSignal() -> void:
+	$Paddle.show()
 	reset()
-
+	
 func reset() -> void:
 	emit_signal("reset")
 	spawnGrid()
